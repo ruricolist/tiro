@@ -1,0 +1,16 @@
+* Tiro
+
+Tiro is a library for developing your own personal shorthand, in the tradition of scholars and students of all the ages. Do you ever jot down notes by hand in a compressed form, then type them out later? Why shouldn’t Emacs be able to understand those same abbreviations? This is what Tiro is for.
+
+Tiro defines a minor mode, ~tiro-mode~. When you turn on Tiro mode, then regardless of what other modes are in effect, Tiro takes over. When you turn ~tiro-mode~, everything goes back to normal.
+
+For Tiro to be useful, you should give ~tiro-mode~ a short keybinding,
+ideally a single key; I use F12.
+
+You add an abbreviation by positining your cursor after the abbreviation to be expanded and using ~tiro-add~.
+
+Note that a single abbreviation can have multiple expansions. You can
+select the expansion by number, or narrow by typing a character which
+is only included in a subset of the expansions.
+
+Besides allowing you to define your own abbreviations, Tiro has other tricks. See ~M-x customize-group tiro~ for the details.
