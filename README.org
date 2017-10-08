@@ -7,7 +7,7 @@ Tiro defines a minor mode, ~tiro-mode~. When you turn on Tiro mode, then regardl
 For Tiro to be useful, you should give ~tiro-mode~ a short keybinding,
 ideally a single key; I use F12.
 
-You add an abbreviation by positining your cursor after the abbreviation to be expanded and using ~tiro-add~.
+You add an abbreviation by positioning your cursor after the abbreviation to be expanded and using ~tiro-add~.
 
 Note that a single abbreviation can have multiple expansions. You can
 select the expansion by number, or narrow by typing a character which
