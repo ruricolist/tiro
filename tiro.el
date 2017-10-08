@@ -293,13 +293,12 @@ derive from `prog-mode'."
            0))))
 
 (defun tiro-spell-out-number (string)
-  (when (featurep 'cl-format)
-    (save-excursion
-      (unless (string-match-p "^00+$" string) ;All zeroes.
-        (let ((n (string-to-number string)))
-          (if (< n tiro-spell-out-below)
-              ;; TODO Check for the beginning of a sentence.
-              (cl-format nil "~r" n)))))))
+  (save-excursion
+    (unless (string-match-p "^00+$" string) ;All zeroes.
+      (let ((n (string-to-number string)))
+        (if (< n tiro-spell-out-below)
+            ;; TODO Check for the beginning of a sentence.
+            (cl-format nil "~r" n))))))
 
 (defconst tiro-prefixes
   (sort '("un" "anti" "in" "re" "per" "trans" "epi" "super" "hyper" "non" "inter")
