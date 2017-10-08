@@ -321,23 +321,8 @@ derive from `prog-mode'."
               suffix (and suffixp (match-string 2 word))))
       (list prefix root suffix))))
 
-;;; cl-digit-char-p is a recent addition.
-(defalias 'tiro-digit-char-p
-  (if (fboundp 'cl-digit-char-p)
-      #'cl-digit-char-p
-    (lambda (char &optional _rax)
-      (cl-case char
-        (?0 0)
-        (?1 1)
-        (?2 2)
-        (?3 3)
-        (?4 4)
-        (?5 5)
-        (?6 6)
-        (?7 7)
-        (?8 8)
-        (?9 9)
-        (t nil)))))
+(defun tiro-digit-char-p (char)
+  (cl-position char "0123456789"))
 
 (defun tiro-raw-expansion (word)
   (gethash word tiro-expansions))
@@ -401,7 +386,7 @@ If there is no common prefix, return `nil'."
                ;; char is not a digit, try to use it as a filter,
                ;; leaving only the choices that include that character.
                ;; If there is only one such choice, just return it.
-               do (if-let (digit (tiro-digit-char-p char 10))
+               do (if-let (digit (tiro-digit-char-p char))
                       (when-let (choice (nth digit choices))
                         (cl-return choice))
                     (case char
