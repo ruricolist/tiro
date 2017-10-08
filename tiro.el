@@ -480,7 +480,7 @@ If there is no common prefix, return `nil'."
 ;;;###autoload
 (define-minor-mode tiro-mode
   "Modal shorthand."
-  :lighter " ⁊"
+  :lighter " Tiro"
   (if tiro-mode
       (progn
         (push (cons 'tiro-mode (tiro-keymap))
