@@ -13,4 +13,6 @@ Note that a single abbreviation can have multiple expansions. You can
 select the expansion by number, or narrow by typing a character which
 is only included in a subset of the expansions.
 
+To use Tiro, you must have the `look` utility in your load path.
+
 Besides allowing you to define your own abbreviations, Tiro has other tricks. See ~M-x customize-group tiro~ for the details.
