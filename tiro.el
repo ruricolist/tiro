@@ -479,6 +479,8 @@ If there is no common prefix, return `nil'."
   (if tiro-mode
       (progn
         (push (cons 'tiro-mode (tiro-keymap))
-              minor-mode-overriding-map-alist))
+              minor-mode-overriding-map-alist)
+        (unless (file-exists-p tiro-dictionary)
+          (warn "Tiro dictionary (%s) does not exist." tiro-dictionary)))
     (progn
       (pop minor-mode-overriding-map-alist))))
