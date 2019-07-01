@@ -193,6 +193,7 @@ derive from `prog-mode'."
         (replace-match sub t t nil 1)))))
 
 (defun tiro-memoize (function)
+  "Return a memoized version of FUNCTION."
   (let ((cache (make-hash-table :test 'equal))
         (no-value-marker (make-symbol "no-value")))
     (lambda (&rest args)
@@ -202,7 +203,12 @@ derive from `prog-mode'."
                   (apply function args))
           value)))))
 
+;;; TODO You could actually call a spellchecker
+;;; (`ispell-program-name') here, instead of `look', so the checker
+;;; could take care of derived forms (-ing &c.)
+
 (defun tiro-lookup-word (word)
+  ;; Use a pipe instead of a PTY for speed.
   (let ((process-connection-type nil))
     (zerop (call-process "look" nil nil nil
                          ispell-look-options
@@ -213,7 +219,11 @@ derive from `prog-mode'."
          (tiro-memoize #'tiro-lookup-word)))
     (lambda (word)
       (or (funcall lookup-word word)
-          (tiro-word-in-buffer-p word)))))
+          ;; TODO other buffers in the same mode?
+          (tiro-word-in-buffer-p word))))
+  "Return T if WORD is a real word.
+A word is considered real if it occurs in the current buffer, or in `tiro-dictionary'.
+Note that lookups in tiro-dictionary are memoized.")
 
 (defun tiro-word-in-buffer-p (word)
   (save-restriction
