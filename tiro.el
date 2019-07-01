@@ -276,7 +276,8 @@ derive from `prog-mode'."
 (defun tiro-add (abbr)
   (interactive (list (tiro-word-at-point)))
   (let* ((default (tiro-raw-expansion abbr))
-         (expansion (read-string (format "Expansion for `%s': " abbr) default)))
+         (expansion (read-string (format "Expansion for `%s': " abbr)
+                                 (or default abbr))))
     (unless (> (length expansion) 0)
       (setf expansion abbr))
     (with-temp-buffer
