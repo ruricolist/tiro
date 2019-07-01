@@ -176,7 +176,7 @@ derive from `prog-mode'."
 (defun tiro-sub-last-word (sub)
   (save-excursion
     (when (with-tiro-syntax
-           (re-search-backward "\\W\\(\\w+\\)" nil t))
+           (re-search-backward "\\b\\(\\w+\\)" nil t))
       (let* ((orig (match-string 1))
              (cap
               (tiro-upper-case-p (aref orig 0)))
