@@ -178,8 +178,18 @@ derive from `prog-mode'."
     (when (with-tiro-syntax
            (re-search-backward "\\W\\(\\w+\\)" nil t))
       (let* ((orig (match-string 1))
-             (cap (tiro-upper-case-p (aref orig 0)))
-             (sub (if cap (capitalize sub) sub)))
+             (cap
+              (tiro-upper-case-p (aref orig 0)))
+             (all-caps
+              (cl-every #'tiro-upper-case-p orig))
+             (sub
+              (cond
+               (all-caps (upcase-initials sub))
+               (cap
+                (let ((sub (copy-sequence sub)))
+                  (cl-callf capitalize (aref sub 0))
+                  sub))
+               (t sub))))
         (replace-match sub t t nil 1)))))
 
 (defun tiro-memoize (function)
